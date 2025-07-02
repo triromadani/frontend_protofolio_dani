@@ -6,21 +6,26 @@ function Portfolio() {
   const [form, setForm] = useState({ title: '', description: '' });
   const [editingId, setEditingId] = useState(null);
 
-  const BASE_URL = 'https://backendwebdani-production.up.railway.app';
+  const BASE_URL = 'https://backendwebdani-production.up.railway.app '; // ✅ Perbaiki spasi
 
   // Ambil data proyek dari backend
-  const fetchProjects = () => {
+  const fetchProjects = async () => {
     console.log("🔄 Mengambil data proyek dari backend...");
-    fetch(`${BASE_URL}/api/portfolios`)
-      .then(res => {
-        console.log("📡 Response status:", res.status);
-        return res.json();
-      })
-      .then(data => {
-        console.log("✅ Data dari backend:", data);
-        setProjects(data);
-      })
-      .catch(err => console.error('❌ Fetch projects error:', err));
+    try {
+      const res = await fetch(`${BASE_URL}/api/portfolios`);
+      console.log("📡 Response status:", res.status);
+
+      if (!res.ok) {
+        throw new Error(`Server error: ${res.status}`);
+      }
+
+      const data = await res.json();
+      console.log("✅ Data dari backend:", data);
+      setProjects(data);
+    } catch (err) {
+      console.error('❌ Fetch projects error:', err);
+      alert("Gagal mengambil data dari backend. Pastikan backend sedang aktif.");
+    }
   };
 
   useEffect(() => {
@@ -131,16 +136,20 @@ function Portfolio() {
       </form>
 
       <div className="projects-grid">
-        {projects.map(project => (
-          <div key={project.id} className="project-card">
-            <h3>{project.title}</h3>
-            <p>{project.description}</p>
-            <div className="actions">
-              <button onClick={() => handleEdit(project)}>Edit</button>
-              <button onClick={() => handleDelete(project.id)}>Hapus</button>
+        {projects.length > 0 ? (
+          projects.map(project => (
+            <div key={project.id} className="project-card">
+              <h3>{project.title}</h3>
+              <p>{project.description}</p>
+              <div className="actions">
+                <button onClick={() => handleEdit(project)}>Edit</button>
+                <button onClick={() => handleDelete(project.id)}>Hapus</button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p>Tidak ada proyek ditemukan atau backend sedang offline.</p>
+        )}
       </div>
     </div>
   );
