@@ -27,7 +27,9 @@ function Portfolio() {
   };
 
   // Simpan atau update proyek
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // ⚠️ Ini penting agar tidak reload halaman
+
     if (!form.title || !form.description) return;
 
     const url = editingId
@@ -37,14 +39,19 @@ function Portfolio() {
     const method = editingId ? 'PUT' : 'POST';
 
     try {
-      await fetch(url, {
+      const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
-      fetchProjects();
-      setForm({ title: '', description: '' });
-      setEditingId(null);
+
+      if (res.ok) {
+        fetchProjects();
+        setForm({ title: '', description: '' });
+        setEditingId(null);
+      } else {
+        console.error('Gagal menyimpan data:', await res.text());
+      }
     } catch (err) {
       console.error('Save error:', err);
     }
@@ -90,24 +97,26 @@ function Portfolio() {
         Download Proyek
       </button>
 
-      <div className="form-container">
+      <form className="form-container" onSubmit={handleSubmit}>
         <input
           type="text"
           name="title"
           value={form.title}
           placeholder="Judul Proyek"
           onChange={handleChange}
+          required
         />
         <textarea
           name="description"
           value={form.description}
           placeholder="Deskripsi Proyek"
           onChange={handleChange}
+          required
         />
-        <button onClick={handleSubmit}>
+        <button type="submit">
           {editingId ? 'Simpan Perubahan' : 'Tambah'}
         </button>
-      </div>
+      </form>
 
       <div className="projects-grid">
         {projects.map(project => (
