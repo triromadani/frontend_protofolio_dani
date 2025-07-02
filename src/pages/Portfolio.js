@@ -6,7 +6,7 @@ function Portfolio() {
   const [form, setForm] = useState({ title: '', description: '' });
   const [editingId, setEditingId] = useState(null);
 
-  const BASE_URL = 'https://backendwebdani-production.up.railway.app '; // ✅ Perbaiki spasi
+  const BASE_URL = 'https://backendwebdani-production.up.railway.app/api/portfolios '; // ✅ Perbaiki spasi
 
   // Ambil data proyek dari backend
   const fetchProjects = async () => {
