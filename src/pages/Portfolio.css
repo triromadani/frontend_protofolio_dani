@@ -1,0 +1,120 @@
+/* Container utama */
+.portfolio-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ccff33; /* Background hijau terang */
+  min-height: 100vh;
+}
+
+/* Judul halaman */
+.title {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+/* Tombol download */
+.download-button {
+  display: block;
+  margin: 0 auto 20px;
+  padding: 10px 16px;
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.download-button:hover {
+  background-color: #0056b3;
+}
+
+/* Form input */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.form-container input,
+.form-container textarea {
+  padding: 10px;
+  border: 1px solid #999;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.form-container button {
+  padding: 10px;
+  background-color: #0056b3; 
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Grid untuk daftar proyek */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 10px;
+}
+
+/* Kartu proyek */
+.project-card {
+  background-color: #ffffff; /* Warna putih, kontras dengan latar */
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  transition: transform 0.2s ease;
+}
+
+.project-card:hover {
+  transform: scale(1.02);
+}
+
+/* Judul proyek */
+.project-card h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 20px;
+}
+
+/* Deskripsi proyek */
+.project-card p {
+  margin-bottom: 10px;
+  color: #555;
+}
+
+/* Tombol Edit & Hapus */
+.actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.actions button {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.actions button:first-child {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.actions button:last-child {
+  background-color: #dc3545;
+  color: white;
+}
