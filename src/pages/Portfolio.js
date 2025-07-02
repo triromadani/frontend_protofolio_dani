@@ -6,9 +6,12 @@ function Portfolio() {
   const [form, setForm] = useState({ title: '', description: '' });
   const [editingId, setEditingId] = useState(null);
 
+  // URL backend Railway
+  const API_URL = 'https://beckendwebdani-production.up.railway.app/api/portfolios';
+
   // Ambil data dari backend
   const fetchProjects = () => {
-    fetch('http://localhost:4000/api/portfolios')
+    fetch(API_URL)
       .then(res => res.json())
       .then(data => {
         console.log('Data dari backend:', data);
@@ -34,9 +37,7 @@ function Portfolio() {
       return;
     }
 
-    const url = editingId
-      ? `http://localhost:4000/api/portfolios/${editingId}`
-      : 'http://localhost:4000/api/portfolios';
+    const url = editingId ? `${API_URL}/${editingId}` : API_URL;
     const method = editingId ? 'PUT' : 'POST';
 
     try {
@@ -67,7 +68,7 @@ function Portfolio() {
     if (!window.confirm('Yakin ingin menghapus proyek ini?')) return;
 
     try {
-      const response = await fetch(`http://localhost:4000/api/portfolios/${id}`, {
+      const response = await fetch(`${API_URL}/${id}`, {
         method: 'DELETE',
       });
 
