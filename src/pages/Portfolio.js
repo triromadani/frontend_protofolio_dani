@@ -10,10 +10,17 @@ function Portfolio() {
 
   // Ambil data proyek dari backend
   const fetchProjects = () => {
+    console.log("🔄 Mengambil data proyek dari backend...");
     fetch(`${BASE_URL}/api/portfolios`)
-      .then(res => res.json())
-      .then(data => setProjects(data))
-      .catch(err => console.error('Fetch projects error:', err));
+      .then(res => {
+        console.log("📡 Response status:", res.status);
+        return res.json();
+      })
+      .then(data => {
+        console.log("✅ Data dari backend:", data);
+        setProjects(data);
+      })
+      .catch(err => console.error('❌ Fetch projects error:', err));
   };
 
   useEffect(() => {
@@ -28,7 +35,7 @@ function Portfolio() {
 
   // Simpan atau update proyek
   const handleSubmit = async (e) => {
-    e.preventDefault(); // ⚠️ Ini penting agar tidak reload halaman
+    e.preventDefault();
 
     if (!form.title || !form.description) return;
 
@@ -39,18 +46,23 @@ function Portfolio() {
     const method = editingId ? 'PUT' : 'POST';
 
     try {
+      console.log("📤 Mengirim data:", form);
       const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
 
+      console.log("📨 Status Kirim:", res.status);
+      const resText = await res.text();
+      console.log("📨 Response Text:", resText);
+
       if (res.ok) {
         fetchProjects();
         setForm({ title: '', description: '' });
         setEditingId(null);
       } else {
-        console.error('Gagal menyimpan data:', await res.text());
+        console.error('Gagal menyimpan data:', resText);
       }
     } catch (err) {
       console.error('Save error:', err);
