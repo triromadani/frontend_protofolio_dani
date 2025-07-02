@@ -13,7 +13,7 @@ export default function Contact() {
     e.preventDefault();
 
     try {
-      const res = await fetch('fetch("https://beckendwebdani-production.up.railway.app/api/contact', {
+      const res = await fetch('https://beckendwebdani-production.up.railway.app/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form)
