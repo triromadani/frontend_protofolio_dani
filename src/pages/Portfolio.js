@@ -8,7 +8,7 @@ function Portfolio() {
 
   // Ambil data proyek dari backend
   const fetchProjects = () => {
-    fetch('fetch("https://beckendwebdani-production.up.railway.app/api/portofolios')
+    fetch('fetch("https://beckendwebdani-production.up.railway.app/api/portfolios')
       .then(res => res.json())
       .then(data => setProjects(data))
       .catch(err => console.error('Fetch projects error:', err));
@@ -28,9 +28,10 @@ function Portfolio() {
   const handleSubmit = async () => {
     if (!form.title || !form.description) return;
 
-    const url = editingId
-      ? `http://localhost:4000/api/portfolios/${editingId}`
-      : 'http://localhost:4000/api/portfolios';
+  const url = editingId
+  ? `https://backendwebdani-production.up.railway.app/api/portfolios/${editingId}`
+  : 'https://backendwebdani-production.up.railway.app/api/portfolios';
+
     const method = editingId ? 'PUT' : 'POST';
 
     try {
@@ -57,7 +58,7 @@ function Portfolio() {
   const handleDelete = async (id) => {
     if (!window.confirm('Yakin ingin menghapus proyek ini?')) return;
     try {
-      await fetch(`http://localhost:4000/api/portfolios/${id}`, {
+      await fetch(`https://beckendwebdani-production.up.railway.app/api/portfolios/${id}`, {
         method: 'DELETE',
       });
       fetchProjects();
