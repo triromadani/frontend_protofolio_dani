@@ -8,7 +8,7 @@ function Portfolio() {
 
   // Ambil data proyek dari backend
   const fetchProjects = () => {
-    fetch('http://localhost:4000/api/portfolios')
+    fetch('fetch("https://beckendwebdani-production.up.railway.app/api/protofolios')
       .then(res => res.json())
       .then(data => setProjects(data))
       .catch(err => console.error('Fetch projects error:', err));
