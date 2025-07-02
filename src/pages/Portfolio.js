@@ -12,7 +12,7 @@ function Portfolio() {
   const fetchProjects = async () => {
     console.log("🔄 Mengambil data proyek dari backend...");
     try {
-      const res = await fetch(`${BASE_URL}/api/portfolios`);
+      const res = await fetch(`https://backendwebdani-production.up.railway.app/api/portfolios`);
       console.log("📡 Response status:", res.status);
 
       if (!res.ok) {
@@ -45,8 +45,8 @@ function Portfolio() {
     if (!form.title || !form.description) return;
 
     const url = editingId
-      ? `${BASE_URL}/api/portfolios/${editingId}`
-      : `${BASE_URL}/api/portfolios`;
+      ? `https://backendwebdani-production.up.railway.app/api/portfolios/${editingId}`
+      : `https://backendwebdani-production.up.railway.app/api/portfolios`;
 
     const method = editingId ? 'PUT' : 'POST';
 
